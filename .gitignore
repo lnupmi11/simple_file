@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+*.tlog
+*.log
+*.idb
+*.pdb
+*.ilk
+
+/.vs/Нова папка/v15
+/.vs
+/FileManage/Debug/FileManage.tlog
+/FileManage/Debug/vc141.pdb
+/FileManage/Debug/vc141.idb
+/FileManage/Debug/FileManage.log
+/FileManage/Debug/FileManage.Build.CppClean.log

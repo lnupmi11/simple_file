@@ -1,3 +1,4 @@
+
 #pragma once
 #include <string>
 #include <vector>
@@ -10,12 +11,13 @@ private:
 	void parse(const std::string& input, std::string& command, std::string& file, std::string& initPath, std::string& destinationPath);
 	std::string split(const std::string& str, size_t& pos);
 	int command(const std::string& command);
-	void help();
 	void help(const std::string& command);
-	void copy(const std::string& file, const std::string& from, const std::string& to);
+	void copy();
 	void move(const std::string& file, const std::string& from, const std::string& to);
-	void remove(const std::string& file, const std::string& from);
+	void removeFile();
 public:
 	FileManager();
+
 	void init();
+	void help();
 };
