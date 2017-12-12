@@ -83,7 +83,7 @@ void FileManager::commandProcess(const std::string &command, const std::string &
 		}
 		break;
 	case 7:
-		this->help();
+		this->help(file);
 		break;
 	case 8:
 		exit(0);
@@ -156,7 +156,10 @@ void FileManager::parse(const std::string &input, std::string &command, std::str
 		break;
 	case 6:
 		file = splitted[1];
-		break;
+		break; 
+        case 7:
+		file = splitted[1];
+                break;
 	default:
 		break;
 	}
