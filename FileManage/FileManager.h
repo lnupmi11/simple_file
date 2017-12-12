@@ -9,7 +9,6 @@ private:
 	void commandProcess(const std::string& command, const std::string& file, const std::string& initPath, const std::string& destinationPath);
 	std::string input();
 	void parse(const std::string& input, std::string& command, std::string& file, std::string& initPath, std::string& destinationPath);
-	std::string split(const std::string& str, size_t& pos);
 	int command(const std::string& command);
 	void help(const std::string& command);
 	void copy();
