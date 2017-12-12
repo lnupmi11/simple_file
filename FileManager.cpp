@@ -1,8 +1,10 @@
 #include "FileManager.h"
 #include "invalid_command.h"
 #include <direct.h>
-#include <windows.h>
 #include <experimental/filesystem>
+#include <fstream>
+#include <iostream>
+#include <conio.h>
 #include <cstdio>
 
 #if defined(WIN32) || defined(WIN64)
@@ -63,10 +65,10 @@ void FileManager::commandProcess(const std::string &command, const std::string &
 	//TODO change intergers to enum
 	switch (this->command(command)) {
 	case 1:
-		this->copy(file, initPath, destinationPath);
+		this->copy();
 		break;
 	case 2:
-		this->removeFile(file, initPath);
+		this->removeFile();
 		break;
 	case 3:
 		this->move(file, destinationPath);
@@ -186,6 +188,44 @@ void FileManager::help(const std::string &command) {
 void FileManager::copy(const std::string &file, const std::string &from, const std::string &to) {
 
 }
+void FileManager::copy()
+{
+
+	char * buffer;
+	buffer = new char;
+	string from;
+	string to;
+
+	cout << "Name of the file you want copy from:" << endl;
+	cin >> from;
+	cout << "Name of the file you want copy to:" << endl;
+	cin >> to;
+
+	ifstream initialFile(from.c_str(), ios::in | ios::binary);
+	ofstream outputFile(to.c_str(), ios::out | ios::binary);
+	initialFile.seekg(0, ios::end);
+	long fileSize = initialFile.tellg();
+	if (initialFile.is_open() && outputFile.is_open())
+	{
+		short * buffer = new short[fileSize / 2];
+		initialFile.seekg(0, ios::beg);
+		initialFile.read((char*)buffer, fileSize);
+		outputFile.write((char*)buffer, fileSize);
+		delete[] buffer;
+	}
+	else if (!outputFile.is_open())
+	{
+		cout << "I couldn't open " << from << " for copying!\n";
+	}
+	else if (!initialFile.is_open())
+	{
+		cout << "I couldn't open " << to << " for copying!\n";
+	}
+
+	initialFile.close();
+	outputFile.close();
+	cout << "DONE!" << endl;
+	init();
 
 void FileManager::move(const std::string &file, const std::string &to) {
 	if (rename(file.c_str(), to.c_str()) != 0)
@@ -201,11 +241,18 @@ void FileManager::listDirectory() {
 	std::cout << p.path().filename() << std::endl;
 	}
 }
-
-void FileManager::removeFile(const string &file, const string &from) {
-	if (remove(file.c_str()) != 0)
-		cerr << "Error deleting file: \"" << file << '"' << endl;
+void FileManager::removeFile()
+{
+	int status;
+	char fileName[25];
+	cout << "Name of the file you want to remove:" << endl;
+	cin >> fileName;
+	status = remove(fileName);
+	if (status == 0)
+	{
+		cout << "File Deleted" << endl;
+	}
 	else
-		cout << "File \"" << file << "\" successfully deleted" << endl;
-
+		cout << "Unable to delete file" << endl;
+	init();
 }
