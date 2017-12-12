@@ -30,6 +30,7 @@ FileManager::FileManager() {
 	this->commands.emplace_back("clear");
 	this->commands.emplace_back("pwd");
 	this->commands.emplace_back("ls");
+	this->commands.emplace_back("chdir");
 }
 
 string getCurrentDir() {
@@ -39,6 +40,7 @@ string getCurrentDir() {
 }
 
 void FileManager::init() {
+	chdir("C:\\Users\\User");
 	bool to_exit = false;
 	while (!to_exit) {
 		try {
@@ -97,6 +99,9 @@ void FileManager::commandProcess(const std::string &command, const std::string &
 	case 11:
 		listDirectory();
 		break;
+	case 12:
+		chdir(file.c_str());
+		break;
 	default:
 		std::cerr << "Invalid command '" << command << "'\n";
 		break;
@@ -133,7 +138,7 @@ vector<string> split(const string& delim, const string& toSplit)
 void FileManager::parse(const std::string &input, std::string &command, std::string &file, std::string &initPath,
 	std::string &destinationPath) {
 	size_t pos = 0;
-	auto splitted = split(" ", input);
+	auto splitted = split(", ", input);
 	command = splitted[0];
 	switch (this->command(command)) {
 	case 1:
@@ -158,10 +163,13 @@ void FileManager::parse(const std::string &input, std::string &command, std::str
 		file = splitted[1];
 		break; 
 	case 7:
-		if (split(" ", input).size() != 1)
+		if (split(", ", input).size() != 1)
 		{
 			file = splitted[1];
 		}
+		break;
+	case 12:
+		file = splitted[1];
 		break;
 	default:
 		break;

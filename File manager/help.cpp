@@ -53,6 +53,9 @@ void FileManager::help(const std::string &command) {
 		case 11:
 			cout << "ls - displays everything that the current directory contains  - the names of folders and files, along with file extensions\n";
 			break;
+		case 12:
+			cout << "chdir directory_name - changes the whole path to 'directory_name'. Useful, if you need to change the disc, you want to see files from\n";
+			break;
 		}
 	}
 }
