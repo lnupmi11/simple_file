@@ -157,9 +157,12 @@ void FileManager::parse(const std::string &input, std::string &command, std::str
 	case 6:
 		file = splitted[1];
 		break; 
-        case 7:
-		file = splitted[1];
-                break;
+	case 7:
+		if (split(" ", input).size() != 1)
+		{
+			file = splitted[1];
+		}
+		break;
 	default:
 		break;
 	}
@@ -182,9 +185,6 @@ void FileManager::help() {
 	std::cout << "\n";
 }
 
-void FileManager::help(const std::string &command) {
-
-}
 
 void FileManager::copy(const std::string &file, const std::string &from, const std::string &to) {
 
